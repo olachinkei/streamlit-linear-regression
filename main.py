@@ -200,9 +200,13 @@ if uploaded_file is not None:
             
                 # figure
                 # 精度
+                combined_list = pd.concat([Result["actual"], Result["prediction"]])
+                reference_line = go.Scatter(x=[min(combined_list), max(combined_list)],
+                                            y=[min(combined_list), max(combined_list)],
+                                            mode='lines',line=dict(color='gray', width=1,dash='dot'),showlegend=False)
                 fig = px.scatter(Result, x="actual",y="prediction",hover_name="id")
-                reference_line = go.Scatter(x=[min(Result["actual"].append(Result["prediction"])),max(Result["actual"].append(Result["prediction"]))], y=[min(Result["actual"].append(Result["prediction"])),max(Result["actual"].append(Result["prediction"]))],mode = 'lines',
-                    line=dict(color='gray', width=1,dash='dot'),showlegend=False)
+                #reference_line = go.Scatter(x=[min(Result["actual"].append(Result["prediction"])),max(Result["actual"].append(Result["prediction"]))], y=[min(Result["actual"].append(Result["prediction"])),max(Result["actual"].append(Result["prediction"]))],mode = 'lines',
+                #    line=dict(color='gray', width=1,dash='dot'),showlegend=False)
                 fig.add_trace(reference_line)
 
                 layout = go.Layout(
